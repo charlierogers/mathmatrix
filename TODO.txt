@@ -1,0 +1,25 @@
+Basic things to do:
+1. Make another sprite
+2. Get new images for sprites
+
+
+Motion
+1. Restricting motion to grid positions
+2. Can't move into wall/obstruction
+
+
+Game Play
+2. Setting up the grid
+    a. Visually
+    b. In the code
+
+
+Architecture
+1. Cell class
+    a. ValueCell
+    b. Wall
+2. Player Object
+    a. Position
+    b. Score
+3. TargetValue (rand generated)
+

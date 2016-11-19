@@ -60,6 +60,7 @@ function update() {
     }
     else if (cursors.down.isDown)
     {
+        console.log("moving down");
         sprite.body.moveDown(400);
     }
 
