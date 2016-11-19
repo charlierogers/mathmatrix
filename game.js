@@ -7,6 +7,7 @@ var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'game', { preload: preload, 
 
 function preload() {
 
+    console.log("in preload");
     game.load.image('atari', 'assets/atari130xe.png');
     game.load.image('sky', 'assets/sunset.png');
 
