@@ -26,7 +26,9 @@ function create() {
     game.physics.p2.defaultRestitution = 0.8;
 
     //  Add a sprite
-    sprite = game.add.sprite(200, 200, 'atari');
+    sprite = new Player(game, 300, 300, 'atari');
+    game.add.existing(sprite);
+    // sprite = game.add.sprite(200, 200, 'atari');
 
     //  Enable if for physics. This creates a default rectangular body.
     game.physics.p2.enable(sprite);
