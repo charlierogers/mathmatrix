@@ -27,7 +27,6 @@ function create() {
     //  Make things a bit more bouncey
     game.physics.p2.defaultRestitution = 0.8;
 
-
     //  Add a sprite
     player1= game.add.sprite(200, 200, 'atari');
     player2= game.add.sprite(300,300, 'face');
