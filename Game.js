@@ -10,7 +10,7 @@ function preload() {
     game.load.image('flower', 'assets/flower.png');
     game.load.image('sky', 'assets/sunset.png');
     game.load.image('face', 'assets/bluehappy.png');
-    game.load.image('wall', 'assets/happy.jpg')
+    game.load.image('wall', 'assets/red_brick_wall_thumb')
 
 }
 var player1;
@@ -40,10 +40,11 @@ function create() {
     game.physics.p2.defaultRestitution = 0.8;
 
     //  Add sprites
-    player1 = new Player(game, 10, 10, 'flower');
+    player1 = new Player(game, 25, 25, 'flower');
     game.add.existing(player1);
-    player1.scale.setTo(.1,.1);
-    player2 = new Player(game, 400, 400, 'face');
+    player1.anchor.setTo(.05,.05);
+    player1.scale.setTo(.05,.05);
+    player2 = new Player(game, 575, 575, 'face');
     game.add.existing(player2);
     player2.scale.setTo(.1,.1);
 
@@ -73,6 +74,15 @@ function create() {
 
 function update() {
 
+
+
+    // figuring out when they should be moving
+
+
+
+
+
+    //how they are moving
     player2.body.setZeroVelocity();
 
 
@@ -92,6 +102,7 @@ function update() {
     if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
 
         player2.body.moveUp(400);
+
     }
 
 
