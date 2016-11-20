@@ -94,48 +94,32 @@ function nearBottomRight(row, col) {
     return (row > (grid.height - 4)) && (col > (grid.width - 4));
 }
 
+function displayPlayerScores() {
+    var style = {
+        font: "25px Arial",
+        fill: "#ffffff", /*wordWrap: true,*/
+        wordWrapWidth: this.width,
+        align: "center",
+        backgroundColor: "#000000"
+    };
+    var text = game.add.text(50, 35, "Player 1 \n" + player1.getScore(), style);
+    var style = {
+        font: "25px Arial",
+        fill: "#ffffff", /*wordWrap: true,*/
+        wordWrapWidth: this.width,
+        align: "center",
+        backgroundColor: "#000000"
+    };
+    var text = game.add.text(835, 35, "Player 2 \n" + player2.getScore(), style);
+}
+
+
+
 function update() {
-    // figuring out when they should be moving
-
-        //Score figuring out
-
-        //Score = Score (Operation) (Number of Value Cell)
 
 
-        //Targetvalue Project
+    displayPlayerScores();
 
-
-//    Player 1 Score
-
-
-        var style = {
-            font: "25px Arial",
-            fill: "#ffffff", /*wordWrap: true,*/
-            wordWrapWidth: this.width,
-            align: "center",
-            backgroundColor: "#000000"
-        };
-        var text = game.add.text(50, 35, "Player 1 \n" + player1.getScore(), style);
-
-
-//     Player 2 Score
-
-
-        var style = {
-            font: "25px Arial",
-            fill: "#ffffff", /*wordWrap: true,*/
-            wordWrapWidth: this.width,
-            align: "center",
-            backgroundColor: "#000000"
-        };
-        var text = game.add.text(835, 35, "Player 2 \n" + player2.getScore(), style);
-
-
-        //how they are moving
-
-    //PLAYER 1 MOTION
-    //how they are moving
-    // player1.body.setZeroVelocity();
 
         //TODO: Change all the move statements so that they're inside of Player and then call the Player.move<DIRECTION> function
         //TODO: All collision detection will be done in Player
