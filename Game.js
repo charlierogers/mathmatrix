@@ -228,7 +228,7 @@ function displayPlayerScores() {
 
 function createTimer() {
 
-    timer.timeLabel = game.add.text(game.world.centerX, 750,"00:00",{font: "50px Arial", fill: "#fff"});
+    timer.timeLabel = game.add.text(game.world.centerX, 750,"",{font: "50px Arial", fill: "#fff"});
     timer.timeLabel.anchor.setTo(0.5, 0);
     timer.timeLabel.align = 'right';
 }
@@ -240,7 +240,7 @@ function updateTimer() {
     //Time elapsed in seconds
     timer.timeElapsed = Math.abs(timeDifference / 1000);
     //Time remaining in seconds
-    var timeRemaining = timer.totalTime - timer.timeElapsed;
+    var timeRemaining = timer.totalTime - timer.timeElapsed
     //Convert seconds into minutes and seconds
     var minutes = Math.floor(timeRemaining / 60);
     var seconds = Math.floor(timeRemaining) - (60 * minutes);
