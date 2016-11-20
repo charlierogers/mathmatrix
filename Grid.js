@@ -31,7 +31,9 @@ Grid.prototype.addCell = function (cell, row, col) {
 };
 
 Grid.prototype.getCellAtLocation = function (row, col) {
-    //TODO: Return the cell at the specified location
-    return this.cell[row][col]
-
+    if (row < this.height && col < this.width) {
+        return this.cells[row][col]
+    } else {
+        return false;
+    }
 };

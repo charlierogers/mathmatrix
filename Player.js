@@ -25,42 +25,48 @@ Player.prototype.constructor = Player;
 //TODO: Also update the gridRow and gridCol appropriately
 //TODO: Run the update score algorithm on the score member variable
 Player.prototype.moveUp = function () {
-    if (grid.getCellAtLocation(this.gridRow - 1, this.gridCol).isValueCell()) {
+    if (this.canMoveToGridLocation(this.gridRow - 1, this.gridCol)) {
         //move to new location
         this.moveToGridLocation(this.gridRow - 1, this.gridCol);
-        this.y = this.y - (grid.cellHeight);
+        this.y = this.y - (this.grid.cellHeight);
     }
 };
 
 Player.prototype.moveDown = function () {
-    if (grid.getCellAtLocation(this.gridRow + 1, this.gridCol).isValueCell()) {
+    if (this.canMoveToGridLocation(this.gridRow + 1, this.gridCol)) {
         //move to new location
         this.moveToGridLocation(this.gridRow + 1, this.gridCol);
-        this.y =  this.y  + (grid.cellHeight);
+        this.y =  this.y  + (this.grid.cellHeight);
     }
 };
-}
+
 
 Player.prototype.moveLeft = function () {
-    if (grid.getCellAtLocation(this.gridRow, this.gridCol - 1).isValueCell()) {
+    if (this.canMoveToGridLocation(this.gridRow, this.gridCol - 1)) {
         //move to new location
         this.moveToGridLocation(this.gridRow, this.gridCol - 1);
-        this.x = this.x - ( grid.cellWidth);
+        this.x = this.x - (this.grid.cellWidth);
     }
 };
 
 Player.prototype.moveRight = function () {
-    if (grid.getCellAtLocation(this.gridRow, this.gridCol + 1).isValueCell()) {
+    if (this.canMoveToGridLocation(this.gridRow, this.gridCol + 1)) {
         //move to new location
         this.moveToGridLocation(this.gridRow, this.gridCol + 1);
-        this.x = this.x + (grid.cellWidth);
+        this.x = this.x + (this.grid.cellWidth);
     }
+};
+
+Player.prototype.canMoveToGridLocation = function (row, col) {
+    return (row < this.grid.height && col < this.grid.width) &&
+        (row >= 0 && col >= 0 ) &&
+        (this.grid.getCellAtLocation(row, col).isValueCell());
 };
 
 Player.prototype.moveToGridLocation = function (row, col) {
     this.gridRow = row;
     this.gridCol = col;
-    var cell = grid.getCellAtLocation(row, col);
+    var cell = this.grid.getCellAtLocation(row, col);
     if (cell.isValueCell()) {
         if (cell.getOperationCode() == constants.ADD) {
             this.score = this.score + cell.getValue();
