@@ -24,5 +24,3 @@ Player.prototype.multiplyToScore = function (value){
 Player.prototype.divideToScore = function (value){
     this.score = this.score / value
 };
-
-
