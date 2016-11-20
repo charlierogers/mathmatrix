@@ -19,11 +19,11 @@ var player2;
 var targetvalue;
 var grid;
 var GRID_WIDTH = 12, GRID_HEIGHT = 12;
-
+var timer = {};
 
 function create() {
 
-    targetvalue = Math.floor(Math. random()*20);
+    targetvalue = Math.floor(Math.random() * 20);
 
     // game.add.image(0, 0, 'sky');
 
@@ -73,6 +73,17 @@ function create() {
     game.input.keyboard.addKey(Phaser.Keyboard.S);
     game.input.keyboard.addKey(Phaser.Keyboard.A);
     game.input.keyboard.addKey(Phaser.Keyboard.D);
+
+    timer.strartTime = new Date();
+    timer.totalTime = 120;
+    timer.timeElapsed = 0;
+    createTimer();
+    timer.gameTimer = game.time.events.loop(100, function (){
+            updateTimer();
+        });
+
+
+
 
 }
 
@@ -210,5 +221,33 @@ function update() {
         }
 
     }
+
+
+ function createTimer(){
+
+    timer.timeLabel = game.add.text(game.world.centerX, 100,"00:00",{font: "100px Arial", fill: "#fff"});
+    timer.timeLabel.anchor.setTo(0.5, 0);
+    timer.timeLabel.align = 'right';
+}
+ function updateTimer(){
+
+    var currentTime = new Date();
+    var timeDifference = timer.startTime.getTime() - currentTime.getTime();
+    //Time elapsed in seconds
+    timer.timeElapsed = Math.abs(timeDifference / 1000);
+    //Time remaining in seconds
+    var timeRemaining = timer.totalTime - timer.timeElapsed
+    //Convert seconds into minutes and seconds
+    var minutes = Math.floor(timeRemaining / 60);
+    var seconds = Math.floor(timRemaining) - (60 * minutes);
+    //Display minutes, add a 0 to the start if less than 10
+    var result = (minutes < 10) ? "0" + minutes : minutes;
+    //Display seconds, add a 0 to the start if less than 10
+    result += (seconds < 10) ? ":0" + seconds : ":" + seconds;
+    timer.timeLabel.text = result;
+    if(timer.timeElapsed >= timer.totalTime){
+        console.log("game.stop")
+    }
+}
 
 
