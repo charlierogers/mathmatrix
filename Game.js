@@ -225,9 +225,6 @@ function updateTimer() {
     //Display seconds, add a 0 to the start if less than 10
     result += (seconds < 10) ? ":0" + seconds : ":" + seconds;
     timer.timeLabel.text = result;
-    if(timer.timeElapsed >= timer.totalTime){
-        console.log("game stop")
-    }
-}
+    if(timer.timeElapsed >= timer.totalTime)
 
 
