@@ -28,6 +28,7 @@ Player.prototype.constructor = Player;
 Player.prototype.moveUp = function () {
     if (this.canMoveToGridLocation(this.gridRow - 1, this.gridCol)) {
         //move to new location
+        // console.log("moved up")
         this.moveToGridLocation(this.gridRow - 1, this.gridCol);
         this.y = this.y - (this.grid.cellHeight);
     }
@@ -36,6 +37,7 @@ Player.prototype.moveUp = function () {
 Player.prototype.moveDown = function () {
     if (this.canMoveToGridLocation(this.gridRow + 1, this.gridCol)) {
         //move to new location
+        // console.log("moved down")
         this.moveToGridLocation(this.gridRow + 1, this.gridCol);
         this.y =  this.y  + (this.grid.cellHeight);
     }
@@ -45,6 +47,7 @@ Player.prototype.moveDown = function () {
 Player.prototype.moveLeft = function () {
     if (this.canMoveToGridLocation(this.gridRow, this.gridCol - 1)) {
         //move to new location
+        // console.log("moved left")
         this.moveToGridLocation(this.gridRow, this.gridCol - 1);
         this.x = this.x - (this.grid.cellWidth);
     }
@@ -53,6 +56,7 @@ Player.prototype.moveLeft = function () {
 Player.prototype.moveRight = function () {
     if (this.canMoveToGridLocation(this.gridRow, this.gridCol + 1)) {
         //move to new location
+        // console.log("moved right")
         this.moveToGridLocation(this.gridRow, this.gridCol + 1);
         this.x = this.x + (this.grid.cellWidth);
     }
