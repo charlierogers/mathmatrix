@@ -51,7 +51,7 @@ function create() {
     game.input.keyboard.addKey(Phaser.Keyboard.A);
     game.input.keyboard.addKey(Phaser.Keyboard.D);
 
-    timer.strartTime = new Date();
+    timer.startTime = new Date();
     timer.totalTime = 120;
     timer.timeElapsed = 0;
     createTimer();
@@ -241,14 +241,14 @@ function update() {
     var timeRemaining = timer.totalTime - timer.timeElapsed
     //Convert seconds into minutes and seconds
     var minutes = Math.floor(timeRemaining / 60);
-    var seconds = Math.floor(timRemaining) - (60 * minutes);
+    var seconds = Math.floor(timeRemaining) - (60 * minutes);
     //Display minutes, add a 0 to the start if less than 10
     var result = (minutes < 10) ? "0" + minutes : minutes;
     //Display seconds, add a 0 to the start if less than 10
     result += (seconds < 10) ? ":0" + seconds : ":" + seconds;
     timer.timeLabel.text = result;
     if(timer.timeElapsed >= timer.totalTime){
-        console.log("game.stop")
+        console.log("game stop")
     }
 }
 
