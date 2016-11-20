@@ -16,10 +16,13 @@ var player1;
 var cursors;
 var player2;
 var wasd;
+var targetvalue;
 
 
 
 function create() {
+
+    targetvalue = Math.floor(Math. random()*20);
 
     game.add.image(0, 0, 'sky');
 

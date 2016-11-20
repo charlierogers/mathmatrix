@@ -15,3 +15,16 @@ Player.prototype.addToScore = function (value) {
 };
 
 //TODO: Implement the rest of the score modifying functions
+
+Player.prototype.subtractToScore = function (value){
+    this.score =  this.score - value
+};
+
+Player.prototype.multiplyToScore = function (value){
+    this.score =  this.score * value
+};
+Player.prototype.divideToScore = function (value){
+    this.score = this.score / value
+};
+
+
