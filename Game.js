@@ -42,7 +42,8 @@ function setupTimer() {
     timer.totalTime = 120;
     timer.timeElapsed = 0;
     createTimer();
-    timer.gameTimer = game.time.events.loop(100, function () {
+    timer.gameTimer = game.time.events;
+    timer.gameTimer.loop(100, function (){
         updateTimer();
     });
 }
@@ -84,13 +85,6 @@ function setTargetValue() {
     };
     var text = game.add.text(430, 35, "Target Value \n" + targetvalue, style);
 
-    timer.startTime = new Date();
-    timer.totalTime = 120;
-    timer.timeElapsed = 0;
-    createTimer();
-    timer.gameTimer = game.time.events.loop(100, function (){
-        updateTimer();
-    });
 }
 
 function addCellToGridAtLocation(row, col) {
@@ -257,6 +251,8 @@ function updateTimer() {
     timer.timeLabel.text = result;
     if(timer.timeElapsed >= timer.totalTime){
         console.log("game stop")
+        timer.gameTimer.destroy();
+        timer.timeLabel.text = "00:00";
     }
 }
 
