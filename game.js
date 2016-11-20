@@ -10,7 +10,7 @@ function preload() {
     game.load.image('flower', 'assets/flower.png');
     game.load.image('sky', 'assets/sunset.png');
     game.load.image('face', 'assets/bluehappy.png');
-    game.load.image('wall', 'assets/happy.jpg')
+    game.load.image('wall', 'assets/red_brick_wall_thumb')
 
 }
 var player1;
@@ -93,6 +93,7 @@ function update() {
     if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
 
         player2.body.moveUp(400);
+
     }
 
 
