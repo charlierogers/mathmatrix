@@ -114,11 +114,11 @@ function update() {
     // not done
     if  (player1.getScore() == targetvalue) {
         playingGame = false;
-        console.log("You won!")
+        console.log("Player 1 won!")
     }
     else if (player2.getScore() == targetvalue){
         playingGame = false;
-        console.log("You won!")
+        console.log("Player 2 won!")
     }
 
     if (playingGame) {
