@@ -14,7 +14,7 @@
 var ValueCell = function (game) {
     Cell.call(this, game, 0, 0);
     this.valueCell = true;
-    this.value = Math.floor(Math. random()*20);
+    this.value = Math.floor(Math. random() * 10 + 1);
     //Generates random number from 0 to 3 to represent code for operation
     this.operationCode = Math.floor(Math.random()*4);
     this.operation;
