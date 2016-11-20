@@ -3,7 +3,7 @@
  */
 
 
-var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'game', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(1000, 800, Phaser.CANVAS, 'game', { preload: preload, create: create, update: update });
 
 function preload() {
 
@@ -23,12 +23,15 @@ var GRID_WIDTH = 12, GRID_HEIGHT = 12;
 
 function create() {
 
-    targetvalue = Math.floor(Math. random()*20);
 
-    // game.add.image(0, 0, 'sky');
+
+
+
+
+
 
     //TODO: Make the grid random
-    grid = new Grid(0, 0, GRID_WIDTH, GRID_HEIGHT, 50, 50);
+    grid = new Grid(200, 100, GRID_WIDTH, GRID_HEIGHT, 50, 50);
     for (var row = 0; row < grid.height; row++) {
         for (var col = 0; col < grid.width; col++) {
             if ((row < 3 && col < 3) || ((row > (grid.height - 4)) && (col > (grid.width - 4)))) {
@@ -39,29 +42,12 @@ function create() {
         }
     }
 
-    //	Enable p2 physics
-    // game.physics.startSystem(Phaser.Physics.P2JS);
-
-    //  Make things a bit more bouncey
-    // game.physics.p2.defaultRestitution = 0.8;
 
     //  Add sprites
     player1 = new Player(game, grid, 0, 0, 'flower');
     game.add.existing(player1);
     player2 = new Player(game, grid, grid.height - 1, grid.width - 1, 'face');
     game.add.existing(player2);
-
-
-    //  Enable if for physics. This creates a default rectangular body.
-    // game.physics.p2.enable(player1);
-    // game.physics.p2.enable(player2);
-
-    //  Modify a few body properties
-    // player1.body.setZeroDamping();
-    // player1.body.fixedRotation = true;
-
-    // player2.body.setZeroDamping();
-    // player2.body.fixedRotation = true;
 
 
     //TODO: Figure out positioning of text one the scores text gets put in here
@@ -74,125 +60,134 @@ function create() {
     game.input.keyboard.addKey(Phaser.Keyboard.A);
     game.input.keyboard.addKey(Phaser.Keyboard.D);
 
+
+//TargetValue Stuff
+    targetvalue = Math.floor(Math.random() * 20);
+
+    var style = {
+        font: "25px Arial",
+        fill: "#ffffff", /*wordWrap: true,*/
+        wordWrapWidth: this.width,
+        align: "center",
+        backgroundColor: "#000000"
+    };
+    var text = game.add.text(455, 35, "Target Value \n" + targetvalue, style);
+
+
 }
+    function update() {
+        // figuring out when they should be moving
 
-function update() {
-    // figuring out when they should be moving
+        //Score figuring out
 
-    //how they are moving
-    // player1.body.setZeroVelocity();
+        //Score = Score (Operation) (Number of Value Cell)
 
-    //TODO: Change all the move statements so that they're inside of Player and then call the Player.move<DIRECTION> function
-    //TODO: All collision detection will be done in Player
 
-    if (player1.isMoving) {
-        if (!game.input.keyboard.isDown(Phaser.Keyboard.W) && (!game.input.keyboard.isDown(Phaser.Keyboard.S)) && (!game.input.keyboard.isDown(Phaser.Keyboard.A)) && (!game.input.keyboard.isDown(Phaser.Keyboard.D))) {
-            if (!game.input.keyboard.isDown(Phaser.Keyboard.D)) {
+        //Targetvalue Project
 
-                player1.isMoving = false
+
+//    Player 1 Score
+
+
+        var style = {
+            font: "25px Arial",
+            fill: "#ffffff", /*wordWrap: true,*/
+            wordWrapWidth: this.width,
+            align: "center",
+            backgroundColor: "#000000"
+        };
+        var text = game.add.text(50, 35, "Player 1 \n" + player1.getScore(), style);
+
+
+//     Player 2 Score
+
+
+        var style = {
+            font: "25px Arial",
+            fill: "#ffffff", /*wordWrap: true,*/
+            wordWrapWidth: this.width,
+            align: "center",
+            backgroundColor: "#000000"
+        };
+        var text = game.add.text(835, 35, "Player 2 \n" + player2.getScore(), style);
+
+
+        //how they are moving
+
+
+        //TODO: Change all the move statements so that they're inside of Player and then call the Player.move<DIRECTION> function
+        //TODO: All collision detection will be done in Player
+
+        if (player1.isMoving) {
+            if (!game.input.keyboard.isDown(Phaser.Keyboard.W) && (!game.input.keyboard.isDown(Phaser.Keyboard.S)) && (!game.input.keyboard.isDown(Phaser.Keyboard.A)) && (!game.input.keyboard.isDown(Phaser.Keyboard.D))) {
+                if (!game.input.keyboard.isDown(Phaser.Keyboard.D)) {
+
+                    player1.isMoving = false
+                }
             }
         }
-    }
-        // }{
-        //
-        //     player1.isMoving = false
-        // }
 
 
-    // if (player1.isMoving) {
-    //     if  (!game.input.keyboard.isDown(Phaser.Keyboard.S)) {
-    //
-    //         player1.isMoving = false
-    //     }
-    //
-    //
-    // // }
-    // if  (player1.isMoving) {
-    //     if  (!game.input.keyboard.isDown(Phaser.Keyboard.A)) {
-    //
-    //         player1.isMoving = false
-    //     }
-    // }
-    // if  (player1.isMoving) {
-    //     if  (!game.input.keyboard.isDown(Phaser.Keyboard.D)) {
-    //
-    //         player1.isMoving = false
-    //     }
-    // }
-
-
-
-
-
-    if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
-        // player1.moveUp(400);
-        if (!player1.isMoving) {
-            player1.moveUp();
-            player1.isMoving = true
+        if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
+            // player1.moveUp(400);
+            if (!player1.isMoving) {
+                player1.moveUp();
+                player1.isMoving = true
+            }
         }
-    }
 
 
-
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.S)) {
-        // player1.moveDown(400);
-        if (!player1.isMoving) {
-            player1.moveDown();
-            player1.isMoving = true
+        else if (game.input.keyboard.isDown(Phaser.Keyboard.S)) {
+            // player1.moveDown(400);
+            if (!player1.isMoving) {
+                player1.moveDown();
+                player1.isMoving = true
+            }
         }
-    }
 
 
-
-
-    if (game.input.keyboard.isDown(Phaser.Keyboard.A)) {
-        // player1.moveLeft(400);
-        if (!player1.isMoving) {
-            player1.moveLeft();
-            player1.isMoving = true
+        if (game.input.keyboard.isDown(Phaser.Keyboard.A)) {
+            // player1.moveLeft(400);
+            if (!player1.isMoving) {
+                player1.moveLeft();
+                player1.isMoving = true
+            }
         }
-    }
 
 
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.D)) {
-        // player1.moveRight(400);
-        if (!player1.isMoving) {
-            player1.moveRight();
-            player1.isMoving = true
+        else if (game.input.keyboard.isDown(Phaser.Keyboard.D)) {
+            // player1.moveRight(400);
+            if (!player1.isMoving) {
+                player1.moveRight();
+                player1.isMoving = true
+            }
         }
-    }
 
 
+        // player2.body.setZeroVelocity();
 
+        if (player2.isMoving) {
+            if (!cursors.left.isDown && !cursors.right.isDown && !cursors.up.isDown && !cursors.down.isDown) {
 
-
-    // player2.body.setZeroVelocity();
-
-    if  (player2.isMoving) {
-        if  (!cursors.left.isDown && !cursors.right.isDown && !cursors.up.isDown && !cursors.down.isDown) {
-
-            player2.isMoving = false
+                player2.isMoving = false
+            }
         }
-    }
 
 
-
-
-
-    if (cursors.left.isDown) {
-        if (!player2.isMoving) {
-            player2.moveLeft();
-            player2.isMoving = true
+        if (cursors.left.isDown) {
+            if (!player2.isMoving) {
+                player2.moveLeft();
+                player2.isMoving = true
+            }
         }
-    }
 
 
-    else if (cursors.right.isDown) {
-        if (!player2.isMoving) {
-            player2.moveRight();
-            player2.isMoving = true
+        else if (cursors.right.isDown) {
+            if (!player2.isMoving) {
+                player2.moveRight();
+                player2.isMoving = true
+            }
         }
-    }
 
 
         if (cursors.up.isDown) {
