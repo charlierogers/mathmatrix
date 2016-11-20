@@ -56,7 +56,6 @@ function create() {
     game.input.keyboard.addKey(Phaser.Keyboard.A);
     game.input.keyboard.addKey(Phaser.Keyboard.D);
 
-}
 
 //TargetValue Stuff
     targetvalue = Math.floor(Math.random() * 20);
@@ -70,10 +69,8 @@ function create() {
     };
     var text = game.add.text(455, 35, "Target Value \n" + targetvalue, style);
 
-
 }
-    function update() {
-        // figuring out when they should be moving
+
 function addCellToGridAtLocation(row, col) {
     var VALUE_CELL = 0;
     var WALL_CELL = 1;
