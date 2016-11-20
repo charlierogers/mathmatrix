@@ -12,17 +12,19 @@ var Grid = function (x, y, width, height, cellWidth, cellHeight) {
     this.cells = [[]];
 };
 
-Grid.prototype.addCell = function (cell, x, y) {
-    if (x < this.width && y < this.height) {
+Grid.prototype.addCell = function (cell, row, col) {
+    if (col < this.width && row < this.height) {
         //add the cell to the grid
-        if (y >= this.cells.length) {
+        if (row >= this.cells.length) {
             this.cells.push([]);
         }
-        this.cells[y][x] = cell;
-        cell.x = this.xPos + this.cellWidth * x;
-        cell.y = this.yPos + this.cellHeight * y;
+        this.cells[row][col] = cell;
+        cell.x = this.xPos + this.cellWidth * col;
+        cell.y = this.yPos + this.cellHeight * row;
         cell.width = this.cellWidth;
         cell.height = this.cellHeight;
+        cell.setGridPosition(row, col);
+        cell.setGridCellSize(this.cellWidth, this.cellHeight);
         cell.game.add.existing(cell);
         return true;
     } else {

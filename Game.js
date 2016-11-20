@@ -16,7 +16,6 @@ function preload() {
 var player1;
 var cursors;
 var player2;
-var wasd;
 var targetvalue;
 var grid;
 
@@ -31,9 +30,9 @@ function create() {
     game.physics.startSystem(Phaser.Physics.P2JS);
 
     grid = new Grid(0, 0, 12, 12, 50, 50);
-    for (var i = 0; i < grid.height; i++) {
-        for (var j = 0; j < grid.width; j++) {
-            grid.addCell(new WallCell(game, 0, 0, 'wall'), j, i);
+    for (var row = 0; row < grid.height; row++) {
+        for (var col = 0; col < grid.width; col++) {
+            grid.addCell(new WallCell(game, 0, 0, 'wall'), row, col);
         }
     }
 
