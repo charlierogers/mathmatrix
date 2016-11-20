@@ -1,5 +1,4 @@
 Basic things to do:
-1. Make another sprite
 2. Get new images for sprites
 
 

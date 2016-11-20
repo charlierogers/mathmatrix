@@ -11,10 +11,8 @@ Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.addToScore = function (value) {
-    //TODO: Implement this function
+    this.score += value;
 };
-
-//TODO: Implement the rest of the score modifying functions
 
 Player.prototype.subtractToScore = function (value){
     this.score =  this.score - value
