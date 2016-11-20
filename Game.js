@@ -3,7 +3,7 @@
  */
 
 
-var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'game', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(1000, 800, Phaser.CANVAS, 'game', { preload: preload, create: create, update: update });
 
 var player1;
 var cursors;
@@ -11,6 +11,7 @@ var player2;
 var targetvalue;
 var grid;
 var GRID_WIDTH = 12, GRID_HEIGHT = 12;
+var timer = {};
 
 function preload() {
 
@@ -23,10 +24,15 @@ function preload() {
 
 function create() {
 
-    targetvalue = Math.floor(Math. random()*20);
+
+
+
+
+
+
 
     //TODO: Make the grid random
-    grid = new Grid(0, 0, GRID_WIDTH, GRID_HEIGHT, 50, 50);
+    grid = new Grid(200, 100, GRID_WIDTH, GRID_HEIGHT, 50, 50);
     for (var row = 0; row < grid.height; row++) {
         for (var col = 0; col < grid.width; col++) {
             addCellToGridAtLocation(row, col);
@@ -49,6 +55,30 @@ function create() {
     game.input.keyboard.addKey(Phaser.Keyboard.S);
     game.input.keyboard.addKey(Phaser.Keyboard.A);
     game.input.keyboard.addKey(Phaser.Keyboard.D);
+
+
+//TargetValue Stuff
+    targetvalue = Math.floor(Math.random() * 20);
+
+    var style = {
+        font: "25px Arial",
+        fill: "#ffffff", /*wordWrap: true,*/
+        wordWrapWidth: this.width,
+        align: "center",
+        backgroundColor: "#000000"
+    };
+    var text = game.add.text(455, 35, "Target Value \n" + targetvalue, style);
+
+    timer.startTime = new Date();
+    timer.totalTime = 120;
+    timer.timeElapsed = 0;
+    createTimer();
+    timer.gameTimer = game.time.events.loop(100, function (){
+            updateTimer();
+        });
+
+
+
 
 }
 
@@ -74,7 +104,6 @@ function nearTopLeft(row, col) {
 function nearBottomRight(row, col) {
     return (row > (grid.height - 4)) && (col > (grid.width - 4));
 }
-
 
 function update() {
 
@@ -118,8 +147,9 @@ function movePlayer1() {
     }
 }
 
+
 function movePlayer2() {
-//Allow the player to be moved again once this round of moving is done
+    //Allow the player to be moved again once this round of moving is done
     if (player2.isMoving) {
         if (!cursors.left.isDown && !cursors.right.isDown && !cursors.up.isDown && !cursors.down.isDown) {
             player2.isMoving = false
@@ -148,6 +178,34 @@ function movePlayer2() {
             player2.moveDown();
             player2.isMoving = true
         }
+    }
+}
+
+function createTimer() {
+
+    timer.timeLabel = game.add.text(game.world.centerX, 100,"00:00",{font: "100px Arial", fill: "#fff"});
+    timer.timeLabel.anchor.setTo(0.5, 0);
+    timer.timeLabel.align = 'right';
+}
+
+function updateTimer() {
+
+    var currentTime = new Date();
+    var timeDifference = timer.startTime.getTime() - currentTime.getTime();
+    //Time elapsed in seconds
+    timer.timeElapsed = Math.abs(timeDifference / 1000);
+    //Time remaining in seconds
+    var timeRemaining = timer.totalTime - timer.timeElapsed
+    //Convert seconds into minutes and seconds
+    var minutes = Math.floor(timeRemaining / 60);
+    var seconds = Math.floor(timeRemaining) - (60 * minutes);
+    //Display minutes, add a 0 to the start if less than 10
+    var result = (minutes < 10) ? "0" + minutes : minutes;
+    //Display seconds, add a 0 to the start if less than 10
+    result += (seconds < 10) ? ":0" + seconds : ":" + seconds;
+    timer.timeLabel.text = result;
+    if(timer.timeElapsed >= timer.totalTime){
+        console.log("game stop")
     }
 }
 

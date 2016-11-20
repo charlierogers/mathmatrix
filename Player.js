@@ -21,10 +21,18 @@ var Player = function (game, grid, gridRow, gridCol, key) {
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
-//TODO: **Check if the player can actually move to the next space by checking if the cell at next position isn't a wall**
-//TODO: Update the x and y coordinate for each of these using the gridCellWidth and gridCellHeight
-//TODO: Also update the gridRow and gridCol appropriately
-//TODO: Run the update score algorithm on the score member variable
+
+
+Player.prototype.getScore = function (){
+    return Math.round (this.score );
+};
+
+
+
+
+
+
+
 Player.prototype.moveUp = function () {
     if (this.canMoveToGridLocation(this.gridRow - 1, this.gridCol)) {
         //move to new location
