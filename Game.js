@@ -234,7 +234,6 @@ function createTimer() {
 }
 
 function updateTimer() {
-
     var currentTime = new Date();
     var timeDifference = timer.startTime.getTime() - currentTime.getTime();
     //Time elapsed in seconds
@@ -249,6 +248,8 @@ function updateTimer() {
     //Display seconds, add a 0 to the start if less than 10
     result += (seconds < 10) ? ":0" + seconds : ":" + seconds;
     timer.timeLabel.text = result;
-    if(timer.timeElapsed >= timer.totalTime)
+    if(timer.timeElapsed >= timer.totalTime);
+
+}
 
 
