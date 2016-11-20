@@ -111,14 +111,11 @@ function nearBottomRight(row, col) {
 
 function update() {
 
-    // not done
-    if  (player1.getScore() == targetvalue) {
-        playingGame = false;
-        console.log("Player 1 won!")
-    }
-    else if (player2.getScore() == targetvalue){
-        playingGame = false;
-        console.log("Player 2 won!")
+    if (playingGame) {
+        if (player1.getScore() == targetvalue || player2.getScore() == targetvalue) {
+            playingGame = false;
+            timer.gameTimer.destroy();
+        }
     }
 
     if (playingGame) {
@@ -130,11 +127,32 @@ function update() {
         displayPlayerScores();
     }
     else {
-    console.log("Game Ended!")
+        var player1Difference = Math.abs(targetvalue - player1.getScore());
+        var player2Difference = Math.abs(targetvalue - player2.getScore());
+
+        var style = {
+            font: "45px Arial",
+            fill: "#ffffff", /*wordWrap: true,*/
+            wordWrapWidth: this.width,
+            align: "center",
+            backgroundColor: "#000000"
+        };
+
+        if (player1Difference < player2Difference) {
+            //player 1 wins
+            var text = game.add.text(game.world.centerX, game.world.centerY, "Player 1 Wins! \n", style);
+            text.anchor.setTo(0.5, 0.5);
+        } else if (player2Difference < player1Difference) {
+            //player 2 wins
+            var text = game.add.text(game.world.centerX, game.world.centerY, "Player 2 Wins! \n", style);
+            text.anchor.setTo(0.5, 0.5);
+        } else {
+            //tie
+            var text = game.add.text(game.world.centerX, game.world.centerY, "Tie! \n", style);
+            text.anchor.setTo(0.5, 0.5);
+        }
     }
 }
-
-
 
 
 
@@ -252,6 +270,7 @@ function updateTimer() {
         console.log("game stop")
         timer.gameTimer.destroy();
         timer.timeLabel.text = "00:00";
+        playingGame = false;
     }
 }
 
