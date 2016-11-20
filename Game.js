@@ -117,27 +117,33 @@ function nearBottomRight(row, col) {
 
 function update() {
 
-    movePlayer1();
-
-    movePlayer2();
-
-    displayPlayerScores();
     // not done
-    if (playingGame) {
-        if  (player1.getScore() == targetvalue) {
-            playingGame = false
-        }
-        else if (player2.getScore() == targetvalue){
-            playingGame = false
-        }
+    if  (player1.getScore() == targetvalue) {
+        playingGame = false;
+        console.log("You won!")
+    }
+    else if (player2.getScore() == targetvalue){
+        playingGame = false;
+        console.log("You won!")
     }
 
+    if (playingGame) {
 
+        movePlayer1();
 
+        movePlayer2();
 
-
-
+        displayPlayerScores();
+    }
+    else {
+    console.log("Game Ended!")
+    }
 }
+
+
+
+
+
 function movePlayer1() {
     //Allow the player to be moved again once this round of moving is done
     if (player1.isMoving) {
