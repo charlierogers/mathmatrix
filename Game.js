@@ -234,7 +234,6 @@ function createTimer() {
 }
 
 function updateTimer() {
-
     var currentTime = new Date();
     var timeDifference = timer.startTime.getTime() - currentTime.getTime();
     //Time elapsed in seconds
