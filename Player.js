@@ -15,6 +15,7 @@ var Player = function (game, grid, gridRow, gridCol, key) {
     this.anchor.setTo(0.5, 0.5);
     this.width = PLAYER_SIZE_RATIO * grid.cellWidth;
     this.height = PLAYER_SIZE_RATIO * grid.cellHeight;
+    this.isMoving = false;
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);

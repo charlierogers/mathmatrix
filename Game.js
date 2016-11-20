@@ -86,37 +86,61 @@ function update() {
     //TODO: All collision detection will be done in Player
     if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
         // player1.moveUp(400);
-        player1.moveUp();
+        if(!player1.isMoving){
+            player1.moveUp ();
+            player1.isMoving = true
+        }
     }
     else if (game.input.keyboard.isDown(Phaser.Keyboard.S)) {
         // player1.moveDown(400);
-        player1.moveDown();
+        if(!player1.isMoving){
+            player1.moveDown ();
+            player1.isMoving = true
+        }
     }
 
     if (game.input.keyboard.isDown(Phaser.Keyboard.A)) {
         // player1.moveLeft(400);
-        player1.moveLeft();
+        if(!player1.isMoving){
+            player1.moveLeft();
+            player1.isMoving = true
+        }
     }
     else if (game.input.keyboard.isDown(Phaser.Keyboard.D)) {
         // player1.moveRight(400);
-        player1.moveRight();
+        if(!player1.isMoving){
+            player1.moveRight ();
+            player1.isMoving = true
+        }
     }
 
 
     // player2.body.setZeroVelocity();
 
     if (cursors.left.isDown) {
-        player2.moveLeft();
+        if(!player2.isMoving){
+            player2.moveLeft ();
+            player2.isMoving = true
+        }
     }
     else if (cursors.right.isDown) {
-        player2.moveRight();
+        if(!player2.isMoving){
+            player2.moveRight();
+            player2.isMoving = true
+        }
     }
 
     if (cursors.up.isDown) {
-        player2.moveUp();
+        if(!player2.isMoving){
+            player2.moveUp();
+            player2.isMoving = true
+        }
     }
     else if (cursors.down.isDown) {
-        player2.moveDown();
+        if(!player2.isMoving){
+            player2.moveDown();
+            player2.isMoving = true
+        }
     }
 
 }
