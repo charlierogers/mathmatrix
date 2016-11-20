@@ -26,18 +26,30 @@ Player.prototype.constructor = Player;
 //TODO: Run the update score algorithm on the score member variable
 Player.prototype.moveUp = function () {
     //TODO: Finish this
+    this.y = this.y - (grid.cellHeight);
+    console.log("Moving up");
+
 };
 
 Player.prototype.moveDown = function () {
     //TODO: Finish this
-};
+    this.y =  this.y  + (grid.cellHeight);
+    console.log("Moving down");
+
+}
 
 Player.prototype.moveLeft = function () {
     //TODO: Finish this
+    this.x = this.x - ( grid.cellWidth);
+    console.log("Moving left");
+
 };
 
 Player.prototype.moveRight = function () {
     //TODO: Finish this
+    this.x = this.x - (grid.cellWidth);
+    console.log("Moving right");
+
 };
 
 //TODO: These probably won't be used since all collision detection and score updating is done inside Player
