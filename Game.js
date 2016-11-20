@@ -40,10 +40,10 @@ function create() {
     }
 
     //	Enable p2 physics
-    game.physics.startSystem(Phaser.Physics.P2JS);
+    // game.physics.startSystem(Phaser.Physics.P2JS);
 
     //  Make things a bit more bouncey
-    game.physics.p2.defaultRestitution = 0.8;
+    // game.physics.p2.defaultRestitution = 0.8;
 
     //  Add sprites
     player1 = new Player(game, grid, 0, 0, 'flower');
@@ -53,15 +53,15 @@ function create() {
 
 
     //  Enable if for physics. This creates a default rectangular body.
-    game.physics.p2.enable(player1);
-    game.physics.p2.enable(player2);
+    // game.physics.p2.enable(player1);
+    // game.physics.p2.enable(player2);
 
     //  Modify a few body properties
-    player1.body.setZeroDamping();
-    player1.body.fixedRotation = true;
+    // player1.body.setZeroDamping();
+    // player1.body.fixedRotation = true;
 
-    player2.body.setZeroDamping();
-    player2.body.fixedRotation = true;
+    // player2.body.setZeroDamping();
+    // player2.body.fixedRotation = true;
 
 
     //TODO: Figure out positioning of text one the scores text gets put in here
@@ -80,39 +80,43 @@ function update() {
     // figuring out when they should be moving
 
     //how they are moving
-    player1.body.setZeroVelocity();
+    // player1.body.setZeroVelocity();
 
     //TODO: Change all the move statements so that they're inside of Player and then call the Player.move<DIRECTION> function
     //TODO: All collision detection will be done in Player
     if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
-        player1.body.moveUp(400);
+        // player1.moveUp(400);
+        player1.moveUp();
     }
     else if (game.input.keyboard.isDown(Phaser.Keyboard.S)) {
-        player1.body.moveDown(400)
+        // player1.moveDown(400);
+        player1.moveDown();
     }
 
     if (game.input.keyboard.isDown(Phaser.Keyboard.A)) {
-        player1.body.moveLeft(400);
+        // player1.moveLeft(400);
+        player1.moveLeft();
     }
     else if (game.input.keyboard.isDown(Phaser.Keyboard.D)) {
-        player1.body.moveRight(400);
+        // player1.moveRight(400);
+        player1.moveRight();
     }
 
 
-    player2.body.setZeroVelocity();
+    // player2.body.setZeroVelocity();
 
     if (cursors.left.isDown) {
-        player2.body.moveLeft(400);
+        player2.moveLeft();
     }
     else if (cursors.right.isDown) {
-        player2.body.moveRight(400);
+        player2.moveRight();
     }
 
     if (cursors.up.isDown) {
-        player2.body.moveUp(400);
+        player2.moveUp();
     }
     else if (cursors.down.isDown) {
-        player2.body.moveDown(400);
+        player2.moveDown();
     }
 
 }

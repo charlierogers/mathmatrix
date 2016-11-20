@@ -25,34 +25,35 @@ Player.prototype.constructor = Player;
 //TODO: Also update the gridRow and gridCol appropriately
 //TODO: Run the update score algorithm on the score member variable
 Player.prototype.moveUp = function () {
-    //TODO: Finish this
     if (grid.getCellAtLocation(this.gridRow - 1, this.gridCol).isValueCell()) {
         //move to new location
         this.moveToGridLocation(this.gridRow - 1, this.gridCol);
+        this.y = this.y - (grid.cellHeight);
     }
 };
 
 Player.prototype.moveDown = function () {
-    //TODO: Finish this
     if (grid.getCellAtLocation(this.gridRow + 1, this.gridCol).isValueCell()) {
         //move to new location
         this.moveToGridLocation(this.gridRow + 1, this.gridCol);
+        this.y =  this.y  + (grid.cellHeight);
     }
 };
+}
 
 Player.prototype.moveLeft = function () {
-    //TODO: Finish this
     if (grid.getCellAtLocation(this.gridRow, this.gridCol - 1).isValueCell()) {
         //move to new location
         this.moveToGridLocation(this.gridRow, this.gridCol - 1);
+        this.x = this.x - ( grid.cellWidth);
     }
 };
 
 Player.prototype.moveRight = function () {
-    //TODO: Finish this
     if (grid.getCellAtLocation(this.gridRow, this.gridCol + 1).isValueCell()) {
         //move to new location
         this.moveToGridLocation(this.gridRow, this.gridCol + 1);
+        this.x = this.x + (grid.cellWidth);
     }
 };
 
