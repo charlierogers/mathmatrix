@@ -12,6 +12,8 @@ var targetvalue;
 var grid;
 var GRID_WIDTH = 12, GRID_HEIGHT = 12;
 var timer = {};
+var playingGame = true;
+
 
 function preload() {
 
@@ -80,7 +82,15 @@ function setTargetValue() {
         align: "center",
         backgroundColor: "#000000"
     };
-    var text = game.add.text(455, 35, "Target Value \n" + targetvalue, style);
+    var text = game.add.text(430, 35, "Target Value \n" + targetvalue, style);
+
+    timer.startTime = new Date();
+    timer.totalTime = 120;
+    timer.timeElapsed = 0;
+    createTimer();
+    timer.gameTimer = game.time.events.loop(100, function (){
+        updateTimer();
+    });
 }
 
 function addCellToGridAtLocation(row, col) {
@@ -112,6 +122,20 @@ function update() {
     movePlayer2();
 
     displayPlayerScores();
+    // not done
+    if (playingGame) {
+        if  (player1.getScore() == targetvalue) {
+            playingGame = false
+        }
+        else if (player2.getScore() == targetvalue){
+            playingGame = false
+        }
+    }
+
+
+
+
+
 
 }
 function movePlayer1() {
@@ -204,7 +228,7 @@ function displayPlayerScores() {
 
 function createTimer() {
 
-    timer.timeLabel = game.add.text(game.world.centerX, 100,"00:00",{font: "100px Arial", fill: "#fff"});
+    timer.timeLabel = game.add.text(game.world.centerX, 750,"",{font: "50px Arial", fill: "#fff"});
     timer.timeLabel.anchor.setTo(0.5, 0);
     timer.timeLabel.align = 'right';
 }
@@ -216,7 +240,7 @@ function updateTimer() {
     //Time elapsed in seconds
     timer.timeElapsed = Math.abs(timeDifference / 1000);
     //Time remaining in seconds
-    var timeRemaining = timer.totalTime - timer.timeElapsed;
+    var timeRemaining = timer.totalTime - timer.timeElapsed
     //Convert seconds into minutes and seconds
     var minutes = Math.floor(timeRemaining / 60);
     var seconds = Math.floor(timeRemaining) - (60 * minutes);
