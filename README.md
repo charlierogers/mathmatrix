@@ -1,3 +1,10 @@
+## Math Matrix
+
+#### Arbor Hacks 2 Project
+
+
+
+
 ## The Idea
 
 We wanted to create a web game for two players that was fast-paced and involved basic math. We thought that this would be both a lot of fun and a challenging brain exercise. And that's how _Math Matrix_ was born!
