@@ -47,7 +47,7 @@ Player.prototype.moveLeft = function () {
 
 Player.prototype.moveRight = function () {
     //TODO: Finish this
-    this.x = this.x - (grid.cellWidth);
+    this.x = this.x + (grid.cellWidth);
     console.log("Moving right");
 
 };
