@@ -4,6 +4,7 @@
 
 var WallCell = function (game, x, y, key) {
     Cell.call(this, game, x, y, key);
+    this.valueCell = false;
 };
 
 WallCell.prototype = Object.create(Cell.prototype);

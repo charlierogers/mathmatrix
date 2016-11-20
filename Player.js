@@ -20,8 +20,10 @@ var Player = function (game, grid, gridRow, gridCol, key) {
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
+//TODO: **Check if the player can actually move to the next space by checking if the cell at next position isn't a wall**
 //TODO: Update the x and y coordinate for each of these using the gridCellWidth and gridCellHeight
 //TODO: Also update the gridRow and gridCol appropriately
+//TODO: Run the update score algorithm on the score member variable
 Player.prototype.moveUp = function () {
     //TODO: Finish this
 };
@@ -38,18 +40,19 @@ Player.prototype.moveRight = function () {
     //TODO: Finish this
 };
 
+//TODO: These probably won't be used since all collision detection and score updating is done inside Player
 Player.prototype.addToScore = function (value) {
     this.score = this.score + value;
 };
 
 Player.prototype.subtractFromScore = function (value){
-    this.score =  this.score - value
+    this.score =  this.score - value;
 };
 
 Player.prototype.multiplyScoreBy = function (value){
-    this.score =  this.score * value
+    this.score =  this.score * value;
 };
 
 Player.prototype.divideScoreBy = function (value){
-    this.score = this.score / value
+    this.score = this.score / value;
 };

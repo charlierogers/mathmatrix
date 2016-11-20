@@ -8,7 +8,7 @@ var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'game', { preload: preload, 
 function preload() {
 
     game.load.image('flower', 'assets/flower.png');
-    game.load.image('sky', 'assets/sunset.png');
+    // game.load.image('sky', 'assets/sunset.png');
     game.load.image('face', 'assets/bluehappy.png');
     game.load.image('wall', 'assets/red_brick_wall_thumb');
 
@@ -25,17 +25,21 @@ function create() {
 
     targetvalue = Math.floor(Math. random()*20);
 
-    game.add.image(0, 0, 'sky');
-
-    //	Enable p2 physics
-    game.physics.startSystem(Phaser.Physics.P2JS);
+    // game.add.image(0, 0, 'sky');
 
     grid = new Grid(0, 0, GRID_WIDTH, GRID_HEIGHT, 50, 50);
     for (var row = 0; row < grid.height; row++) {
         for (var col = 0; col < grid.width; col++) {
-            grid.addCell(new WallCell(game, 0, 0, 'wall'), row, col);
+            if (row == 5 && col == 5) {
+                grid.addCell(new ValueCell(game, 0, 0), row, col);
+            } else {
+                grid.addCell(new WallCell(game, 0, 0, 'wall'), row, col);
+            }
         }
     }
+
+    //	Enable p2 physics
+    game.physics.startSystem(Phaser.Physics.P2JS);
 
     //  Make things a bit more bouncey
     game.physics.p2.defaultRestitution = 0.8;
@@ -77,23 +81,20 @@ function update() {
     //how they are moving
     player1.body.setZeroVelocity();
 
-    if (game.input.keyboard.isDown(Phaser.Keyboard.S)) {
-
-        player1.body.moveDown(400)
+    //TODO: Change all the move statements so that they're inside of Player and then call the Player.move<DIRECTION> function
+    //TODO: All collision detection will be done in Player
+    if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
+        player1.body.moveUp(400);
     }
-    if (game.input.keyboard.isDown(Phaser.Keyboard.D)) {
-
-        player1.body.moveRight(400);
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.S)) {
+        player1.body.moveDown(400)
     }
 
     if (game.input.keyboard.isDown(Phaser.Keyboard.A)) {
-
         player1.body.moveLeft(400);
     }
-    if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
-
-        player1.body.moveUp(400);
-
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.D)) {
+        player1.body.moveRight(400);
     }
 
 
@@ -110,7 +111,6 @@ function update() {
         player2.body.moveUp(400);
     }
     else if (cursors.down.isDown) {
-
         player2.body.moveDown(400);
     }
 
