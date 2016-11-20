@@ -2,8 +2,8 @@
  * Created by charlie on 11/19/16.
  */
 
-var WallCell = function (game, x, y, key) {
-    Cell.call(this, game, x, y, key);
+var WallCell = function (game, key) {
+    Cell.call(this, game, 0, 0, key);
     this.valueCell = false;
 };
 

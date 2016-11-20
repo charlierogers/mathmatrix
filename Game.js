@@ -5,20 +5,20 @@
 
 var game = new Phaser.Game(1000, 800, Phaser.CANVAS, 'game', { preload: preload, create: create, update: update });
 
-function preload() {
-
-    game.load.image('flower', 'assets/flower.png');
-    // game.load.image('sky', 'assets/sunset.png');
-    game.load.image('face', 'assets/bluehappy.png');
-    game.load.image('wall', 'assets/red_brick_wall_thumb');
-
-}
 var player1;
 var cursors;
 var player2;
 var targetvalue;
 var grid;
 var GRID_WIDTH = 12, GRID_HEIGHT = 12;
+
+function preload() {
+
+    game.load.image('flower', 'assets/flower.png');
+    game.load.image('face', 'assets/bluehappy.png');
+    game.load.image('wall', 'assets/red_brick_wall_thumb');
+
+}
 
 
 function create() {
@@ -34,11 +34,7 @@ function create() {
     grid = new Grid(200, 100, GRID_WIDTH, GRID_HEIGHT, 50, 50);
     for (var row = 0; row < grid.height; row++) {
         for (var col = 0; col < grid.width; col++) {
-            if ((row < 3 && col < 3) || ((row > (grid.height - 4)) && (col > (grid.width - 4)))) {
-                grid.addCell(new ValueCell(game, 0, 0), row, col);
-            } else {
-                grid.addCell(new WallCell(game, 0, 0, 'wall'), row, col);
-            }
+            addCellToGridAtLocation(row, col);
         }
     }
 
@@ -60,6 +56,7 @@ function create() {
     game.input.keyboard.addKey(Phaser.Keyboard.A);
     game.input.keyboard.addKey(Phaser.Keyboard.D);
 
+}
 
 //TargetValue Stuff
     targetvalue = Math.floor(Math.random() * 20);
@@ -77,6 +74,31 @@ function create() {
 }
     function update() {
         // figuring out when they should be moving
+function addCellToGridAtLocation(row, col) {
+    var VALUE_CELL = 0;
+    var WALL_CELL = 1;
+    if (nearTopLeft(row, col) || nearBottomRight(row, col)) {
+        grid.addCell(new ValueCell(game), row, col);
+    } else {
+        var decision = Math.floor(Math.random() * 2);
+        if (decision == VALUE_CELL) {
+            grid.addCell(new ValueCell(game), row, col)
+        } else {
+            grid.addCell(new WallCell(game, 'wall'), row, col);
+        }
+    }
+}
+
+function nearTopLeft(row, col) {
+    return (row < 3) && (col < 3);
+}
+
+function nearBottomRight(row, col) {
+    return (row > (grid.height - 4)) && (col > (grid.width - 4));
+}
+
+function update() {
+    // figuring out when they should be moving
 
         //Score figuring out
 
@@ -114,6 +136,9 @@ function create() {
 
         //how they are moving
 
+    //PLAYER 1 MOTION
+    //how they are moving
+    // player1.body.setZeroVelocity();
 
         //TODO: Change all the move statements so that they're inside of Player and then call the Player.move<DIRECTION> function
         //TODO: All collision detection will be done in Player
@@ -165,6 +190,11 @@ function create() {
 
 
         // player2.body.setZeroVelocity();
+    //PLAYER 2 MOTION
+
+
+
+    // player2.body.setZeroVelocity();
 
         if (player2.isMoving) {
             if (!cursors.left.isDown && !cursors.right.isDown && !cursors.up.isDown && !cursors.down.isDown) {

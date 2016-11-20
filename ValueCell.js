@@ -11,8 +11,8 @@
  * DIVIDE:      3
  */
 
-var ValueCell = function (game, x, y) {
-    Cell.call(this, game, x, y);
+var ValueCell = function (game) {
+    Cell.call(this, game, 0, 0);
     this.valueCell = true;
     this.value = Math.floor(Math. random()*20);
     //Generates random number from 0 to 3 to represent code for operation
