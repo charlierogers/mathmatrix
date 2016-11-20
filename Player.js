@@ -40,7 +40,7 @@ Player.prototype.moveDown = function () {
         this.y =  this.y  + (grid.cellHeight);
     }
 };
-}
+
 
 Player.prototype.moveLeft = function () {
     if (grid.getCellAtLocation(this.gridRow, this.gridCol - 1).isValueCell()) {

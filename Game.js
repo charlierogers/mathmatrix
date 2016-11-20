@@ -90,7 +90,12 @@ function update() {
             player1.moveUp ();
             player1.isMoving = true
         }
-    }
+        if(player1.isMoving){
+            player1.isMoving = false
+        }
+            }
+
+
     else if (game.input.keyboard.isDown(Phaser.Keyboard.S)) {
         // player1.moveDown(400);
         if(!player1.isMoving){
