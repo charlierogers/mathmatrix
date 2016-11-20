@@ -23,8 +23,6 @@ Grid.prototype.addCell = function (cell, row, col) {
         cell.y = this.yPos + this.cellHeight * row;
         cell.width = this.cellWidth;
         cell.height = this.cellHeight;
-        cell.setGridPosition(row, col);
-        cell.setGridCellSize(this.cellWidth, this.cellHeight);
         cell.game.add.existing(cell);
         return true;
     } else {
