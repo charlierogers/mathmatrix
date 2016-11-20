@@ -27,6 +27,7 @@ function create() {
 
     // game.add.image(0, 0, 'sky');
 
+    //TODO: Make the grid random
     grid = new Grid(0, 0, GRID_WIDTH, GRID_HEIGHT, 50, 50);
     for (var row = 0; row < grid.height; row++) {
         for (var col = 0; col < grid.width; col++) {
