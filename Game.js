@@ -24,14 +24,6 @@ function preload() {
 
 function create() {
 
-
-
-
-
-
-
-
-    //TODO: Make the grid random
     grid = new Grid(200, 100, GRID_WIDTH, GRID_HEIGHT, 50, 50);
     for (var row = 0; row < grid.height; row++) {
         for (var col = 0; col < grid.width; col++) {
@@ -57,7 +49,7 @@ function create() {
     game.input.keyboard.addKey(Phaser.Keyboard.D);
 
 
-//TargetValue Stuff
+    //TargetValue Stuff
     targetvalue = Math.floor(Math.random() * 20);
 
     var style = {
@@ -74,12 +66,8 @@ function create() {
     timer.timeElapsed = 0;
     createTimer();
     timer.gameTimer = game.time.events.loop(100, function (){
-            updateTimer();
-        });
-
-
-
-
+        updateTimer();
+    });
 }
 
 function addCellToGridAtLocation(row, col) {
@@ -114,7 +102,7 @@ function update() {
 }
 
 function movePlayer1() {
-//Allow the player to be moved again once this round of moving is done
+    //Allow the player to be moved again once this round of moving is done
     if (player1.isMoving) {
         if (!game.input.keyboard.isDown(Phaser.Keyboard.W) && (!game.input.keyboard.isDown(Phaser.Keyboard.S)) &&
             (!game.input.keyboard.isDown(Phaser.Keyboard.A)) && (!game.input.keyboard.isDown(Phaser.Keyboard.D))) {
