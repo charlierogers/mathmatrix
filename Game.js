@@ -11,6 +11,7 @@ var player2;
 var targetvalue;
 var grid;
 var GRID_WIDTH = 12, GRID_HEIGHT = 12;
+var timer = {};
 
 function preload() {
 
@@ -23,21 +24,12 @@ function preload() {
 
 function create() {
 
-
-
-
-
-
-
-
-    //TODO: Make the grid random
     grid = new Grid(200, 100, GRID_WIDTH, GRID_HEIGHT, 50, 50);
     for (var row = 0; row < grid.height; row++) {
         for (var col = 0; col < grid.width; col++) {
             addCellToGridAtLocation(row, col);
         }
     }
-
 
     //  Add sprites
     player1 = new Player(game, grid, 0, 0, 'flower');
@@ -57,7 +49,7 @@ function create() {
     game.input.keyboard.addKey(Phaser.Keyboard.D);
 
 
-//TargetValue Stuff
+    //TargetValue Stuff
     targetvalue = Math.floor(Math.random() * 20);
 
     var style = {
@@ -69,6 +61,13 @@ function create() {
     };
     var text = game.add.text(455, 35, "Target Value \n" + targetvalue, style);
 
+    timer.startTime = new Date();
+    timer.totalTime = 120;
+    timer.timeElapsed = 0;
+    createTimer();
+    timer.gameTimer = game.time.events.loop(100, function (){
+        updateTimer();
+    });
 }
 
 function addCellToGridAtLocation(row, col) {
@@ -94,6 +93,86 @@ function nearBottomRight(row, col) {
     return (row > (grid.height - 4)) && (col > (grid.width - 4));
 }
 
+function update() {
+
+    movePlayer1();
+
+    movePlayer2();
+
+
+
+    displayPlayerScores();
+
+}
+function movePlayer1() {
+    //Allow the player to be moved again once this round of moving is done
+    if (player1.isMoving) {
+        if (!game.input.keyboard.isDown(Phaser.Keyboard.W) && (!game.input.keyboard.isDown(Phaser.Keyboard.S)) &&
+            (!game.input.keyboard.isDown(Phaser.Keyboard.A)) && (!game.input.keyboard.isDown(Phaser.Keyboard.D))) {
+            player1.isMoving = false
+        }
+    }
+
+    //Start moving the player if a Key is down and player hasn't started moving already
+    if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
+        if (!player1.isMoving) {
+            player1.moveUp();
+            player1.isMoving = true
+        }
+    } else if (game.input.keyboard.isDown(Phaser.Keyboard.S)) {
+        if (!player1.isMoving) {
+            player1.moveDown();
+            player1.isMoving = true
+        }
+    }
+    if (game.input.keyboard.isDown(Phaser.Keyboard.A)) {
+        if (!player1.isMoving) {
+            player1.moveLeft();
+            player1.isMoving = true
+        }
+    } else if (game.input.keyboard.isDown(Phaser.Keyboard.D)) {
+        if (!player1.isMoving) {
+            player1.moveRight();
+            player1.isMoving = true
+        }
+    }
+}
+
+
+function movePlayer2() {
+    //Allow the player to be moved again once this round of moving is done
+    if (player2.isMoving) {
+        if (!cursors.left.isDown && !cursors.right.isDown && !cursors.up.isDown && !cursors.down.isDown) {
+            player2.isMoving = false
+        }
+    }
+
+    //Start moving the player if a Key is down and player hasn't started moving already
+    if (cursors.left.isDown) {
+        if (!player2.isMoving) {
+            player2.moveLeft();
+            player2.isMoving = true
+        }
+    } else if (cursors.right.isDown) {
+        if (!player2.isMoving) {
+            player2.moveRight();
+            player2.isMoving = true
+        }
+    }
+    if (cursors.up.isDown) {
+        if (!player2.isMoving) {
+            player2.moveUp();
+            player2.isMoving = true
+        }
+    } else if (cursors.down.isDown) {
+        if (!player2.isMoving) {
+            player2.moveDown();
+            player2.isMoving = true
+        }
+    }
+}
+
+
 function displayPlayerScores() {
     var style = {
         font: "25px Arial",
@@ -113,108 +192,32 @@ function displayPlayerScores() {
     var text = game.add.text(835, 35, "Player 2 \n" + player2.getScore(), style);
 }
 
+function createTimer() {
 
+    timer.timeLabel = game.add.text(game.world.centerX, 100,"00:00",{font: "100px Arial", fill: "#fff"});
+    timer.timeLabel.anchor.setTo(0.5, 0);
+    timer.timeLabel.align = 'right';
+}
 
-function update() {
+function updateTimer() {
 
-
-    displayPlayerScores();
-
-
-        //TODO: Change all the move statements so that they're inside of Player and then call the Player.move<DIRECTION> function
-        //TODO: All collision detection will be done in Player
-
-        if (player1.isMoving) {
-            if (!game.input.keyboard.isDown(Phaser.Keyboard.W) && (!game.input.keyboard.isDown(Phaser.Keyboard.S)) && (!game.input.keyboard.isDown(Phaser.Keyboard.A)) && (!game.input.keyboard.isDown(Phaser.Keyboard.D))) {
-                if (!game.input.keyboard.isDown(Phaser.Keyboard.D)) {
-
-                    player1.isMoving = false
-                }
-            }
-        }
-
-
-        if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
-            // player1.moveUp(400);
-            if (!player1.isMoving) {
-                player1.moveUp();
-                player1.isMoving = true
-            }
-        }
-
-
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.S)) {
-            // player1.moveDown(400);
-            if (!player1.isMoving) {
-                player1.moveDown();
-                player1.isMoving = true
-            }
-        }
-
-
-        if (game.input.keyboard.isDown(Phaser.Keyboard.A)) {
-            // player1.moveLeft(400);
-            if (!player1.isMoving) {
-                player1.moveLeft();
-                player1.isMoving = true
-            }
-        }
-
-
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.D)) {
-            // player1.moveRight(400);
-            if (!player1.isMoving) {
-                player1.moveRight();
-                player1.isMoving = true
-            }
-        }
-
-
-        // player2.body.setZeroVelocity();
-    //PLAYER 2 MOTION
-
-
-
-    // player2.body.setZeroVelocity();
-
-        if (player2.isMoving) {
-            if (!cursors.left.isDown && !cursors.right.isDown && !cursors.up.isDown && !cursors.down.isDown) {
-
-                player2.isMoving = false
-            }
-        }
-
-
-        if (cursors.left.isDown) {
-            if (!player2.isMoving) {
-                player2.moveLeft();
-                player2.isMoving = true
-            }
-        }
-
-
-        else if (cursors.right.isDown) {
-            if (!player2.isMoving) {
-                player2.moveRight();
-                player2.isMoving = true
-            }
-        }
-
-
-        if (cursors.up.isDown) {
-            if (!player2.isMoving) {
-                player2.moveUp();
-                player2.isMoving = true
-            }
-        }
-
-        else if (cursors.down.isDown) {
-            if (!player2.isMoving) {
-                player2.moveDown();
-                player2.isMoving = true
-            }
-        }
-
+    var currentTime = new Date();
+    var timeDifference = timer.startTime.getTime() - currentTime.getTime();
+    //Time elapsed in seconds
+    timer.timeElapsed = Math.abs(timeDifference / 1000);
+    //Time remaining in seconds
+    var timeRemaining = timer.totalTime - timer.timeElapsed
+    //Convert seconds into minutes and seconds
+    var minutes = Math.floor(timeRemaining / 60);
+    var seconds = Math.floor(timeRemaining) - (60 * minutes);
+    //Display minutes, add a 0 to the start if less than 10
+    var result = (minutes < 10) ? "0" + minutes : minutes;
+    //Display seconds, add a 0 to the start if less than 10
+    result += (seconds < 10) ? ":0" + seconds : ":" + seconds;
+    timer.timeLabel.text = result;
+    if(timer.timeElapsed >= timer.totalTime){
+        console.log("game stop")
     }
+}
 
 
