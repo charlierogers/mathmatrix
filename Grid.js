@@ -32,6 +32,6 @@ Grid.prototype.addCell = function (cell, row, col) {
 
 Grid.prototype.getCellAtLocation = function (row, col) {
     //TODO: Return the cell at the specified location
+    return this.cell[row][col]
+
 };
-
-
