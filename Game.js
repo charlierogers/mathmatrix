@@ -12,6 +12,8 @@ var targetvalue;
 var grid;
 var GRID_WIDTH = 12, GRID_HEIGHT = 12;
 var timer = {};
+var playingGame = true;
+
 
 function preload() {
 
@@ -59,7 +61,7 @@ function create() {
         align: "center",
         backgroundColor: "#000000"
     };
-    var text = game.add.text(455, 35, "Target Value \n" + targetvalue, style);
+    var text = game.add.text(430, 35, "Target Value \n" + targetvalue, style);
 
     timer.startTime = new Date();
     timer.totalTime = 120;
@@ -102,6 +104,20 @@ function update() {
 
 
     displayPlayerScores();
+    // not done
+    if (playingGame) {
+        if  (player1.getScore() == targetvalue) {
+            playingGame = false
+        }
+        else if (player2.getScore() == targetvalue){
+            playingGame = false
+        }
+    }
+
+
+
+
+
 
 }
 function movePlayer1() {
@@ -194,7 +210,7 @@ function displayPlayerScores() {
 
 function createTimer() {
 
-    timer.timeLabel = game.add.text(game.world.centerX, 100,"00:00",{font: "100px Arial", fill: "#fff"});
+    timer.timeLabel = game.add.text(game.world.centerX, 750,"00:00",{font: "50px Arial", fill: "#fff"});
     timer.timeLabel.anchor.setTo(0.5, 0);
     timer.timeLabel.align = 'right';
 }
