@@ -1,4 +1,4 @@
-## Math Matrix
+# Math Matrix
 
 #### Arbor Hacks 2 Project
 
