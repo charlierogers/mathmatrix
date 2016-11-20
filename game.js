@@ -7,9 +7,10 @@ var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'game', { preload: preload, 
 
 function preload() {
 
-    game.load.image('atari', 'assets/flower.png');
+    game.load.image('flower', 'assets/flower.png');
     game.load.image('sky', 'assets/sunset.png');
     game.load.image('face', 'assets/bluehappy.png');
+    game.load.image('wall', 'assets/happy.jpg')
 
 }
 var player1;
@@ -17,7 +18,7 @@ var cursors;
 var player2;
 var wasd;
 var targetvalue;
-
+var grid;
 
 
 function create() {
@@ -29,19 +30,26 @@ function create() {
     //	Enable p2 physics
     game.physics.startSystem(Phaser.Physics.P2JS);
 
+    grid = new Grid(0, 0, 12, 12, 50, 50);
+    for (var i = 0; i < grid.height; i++) {
+        for (var j = 0; j < grid.width; j++) {
+            grid.addCell(new WallCell(game, 0, 0, 'wall'), j, i);
+        }
+    }
+
     //  Make things a bit more bouncey
     game.physics.p2.defaultRestitution = 0.8;
 
-    //  Add a sprite
-
-    player1= game.add.sprite(200, 200, 'atari');
+    //  Add sprites
+    player1 = new Player(game, 10, 10, 'flower');
+    game.add.existing(player1);
     player1.scale.setTo(.1,.1);
-    player2= game.add.sprite(300,300, 'face');
+    player2 = new Player(game, 400, 400, 'face');
+    game.add.existing(player2);
     player2.scale.setTo(.1,.1);
 
 
     //  Enable if for physics. This creates a default rectangular body.
-
     game.physics.p2.enable(player1);
     game.physics.p2.enable(player2);
 
@@ -57,13 +65,6 @@ function create() {
 
     cursors = game.input.keyboard.createCursorKeys();
 
-    //
-    // wasd = {
-    //     up: game.input.keyboard.addKey(Phaser.Keyboard.W),
-    //     down: game.input.keyboard.addKey(Phaser.Keyboard.S),
-    //     left: game.input.keyboard.addKey(Phaser.Keyboard.A),
-    //     right: game.input.keyboard.addKey(Phaser.Keyboard.D),
-    // }
         game.input.keyboard.addKey(Phaser.Keyboard.W);
         game.input.keyboard.addKey(Phaser.Keyboard.S);
         game.input.keyboard.addKey(Phaser.Keyboard.A);
@@ -72,11 +73,6 @@ function create() {
 }
 
 function update() {
-
-    // console.log ("up: " + wasd.up.isDown);
-    // console.log("down:" + wasd.down.isDown);
-    // console.log("right:" + wasd.right.isDown);
-    // console.log("left" + wasd.left.isDown);
 
     player2.body.setZeroVelocity();
 

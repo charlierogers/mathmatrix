@@ -3,7 +3,7 @@
  */
 
 var WallCell = function (game, x, y, key) {
-    Cell.call(game, x, y, key);
+    Cell.call(this, game, x, y, key);
 };
 
 WallCell.prototype = Object.create(Cell.prototype);
