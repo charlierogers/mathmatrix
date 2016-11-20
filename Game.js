@@ -31,7 +31,7 @@ function create() {
     grid = new Grid(0, 0, GRID_WIDTH, GRID_HEIGHT, 50, 50);
     for (var row = 0; row < grid.height; row++) {
         for (var col = 0; col < grid.width; col++) {
-            if (row == 5 && col == 5) {
+            if ((row < 3 && col < 3) || ((row > (grid.height - 4)) && (col > (grid.width - 4)))) {
                 grid.addCell(new ValueCell(game, 0, 0), row, col);
             } else {
                 grid.addCell(new WallCell(game, 0, 0, 'wall'), row, col);
