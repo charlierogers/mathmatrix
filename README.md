@@ -11,3 +11,7 @@ The game ends when either time runs out or one player's score perfectly matches 
 
 ## Technical Details
 We decided to make the game entirely client side since two of our team members were just getting started with Web Dev. The majority of the code is in Javascript, and we use the Phaser.js animation framework to handle some of the basics of making a game such as sprites, timers, and a game loop.
+
+## Screenshot
+![mathmatrix_game_over](https://cloud.githubusercontent.com/assets/10411526/20466774/5cc21772-af47-11e6-93d7-314c75ece4e3.png)
+_Game over when time runs out. Player 1 wins._
