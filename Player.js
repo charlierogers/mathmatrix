@@ -26,31 +26,54 @@ Player.prototype.constructor = Player;
 //TODO: Also update the gridRow and gridCol appropriately
 //TODO: Run the update score algorithm on the score member variable
 Player.prototype.moveUp = function () {
-    //TODO: Finish this
-    this.y = this.y - (grid.cellHeight);
-    console.log("Moving up");
-
+    if (grid.getCellAtLocation(this.gridRow - 1, this.gridCol).isValueCell()) {
+        //move to new location
+        this.moveToGridLocation(this.gridRow - 1, this.gridCol);
+        this.y = this.y - (grid.cellHeight);
+    }
 };
 
 Player.prototype.moveDown = function () {
-    //TODO: Finish this
-    this.y =  this.y  + (grid.cellHeight);
-    console.log("Moving down");
-
+    if (grid.getCellAtLocation(this.gridRow + 1, this.gridCol).isValueCell()) {
+        //move to new location
+        this.moveToGridLocation(this.gridRow + 1, this.gridCol);
+        this.y =  this.y  + (grid.cellHeight);
+    }
+};
 }
 
 Player.prototype.moveLeft = function () {
-    //TODO: Finish this
-    this.x = this.x - ( grid.cellWidth);
-    console.log("Moving left");
-
+    if (grid.getCellAtLocation(this.gridRow, this.gridCol - 1).isValueCell()) {
+        //move to new location
+        this.moveToGridLocation(this.gridRow, this.gridCol - 1);
+        this.x = this.x - ( grid.cellWidth);
+    }
 };
 
 Player.prototype.moveRight = function () {
-    //TODO: Finish this
-    this.x = this.x + (grid.cellWidth);
-    console.log("Moving right");
+    if (grid.getCellAtLocation(this.gridRow, this.gridCol + 1).isValueCell()) {
+        //move to new location
+        this.moveToGridLocation(this.gridRow, this.gridCol + 1);
+        this.x = this.x + (grid.cellWidth);
+    }
+};
 
+Player.prototype.moveToGridLocation = function (row, col) {
+    this.gridRow = row;
+    this.gridCol = col;
+    var cell = grid.getCellAtLocation(row, col);
+    if (cell.isValueCell()) {
+        if (cell.getOperationCode() == constants.ADD) {
+            this.score = this.score + cell.getValue();
+        } else if (cell.getOperationCode() == constants.SUBTRACT) {
+            this.score = this.score - cell.getValue();
+        } else if (cell.getOperationCode() == constants.MULTIPLY) {
+            this.score = this.score * cell.getValue();
+        } else if (cell.getOperationCode() == constants.DIVIDE) {
+            this.score = this.score / cell.getValue();
+        }
+    }
+    //might have different types of visitable cells later on
 };
 
 //TODO: These probably won't be used since all collision detection and score updating is done inside Player
